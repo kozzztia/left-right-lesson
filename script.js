@@ -1,29 +1,79 @@
-import {dictionary, getDictionary} from "./dictionary/dictianary.js";
-const right = document.querySelector('#right');
-const left= document.querySelector('#left');
-const title= document.querySelector('h2');
+import { dictionary, getDictionary } from "./dictionary/dictianary.js";
+const buttons = document.querySelectorAll('button');
+const title = document.querySelector('h2');
+const score = document.querySelector('h4');
+const languageTitle = document.querySelector('h3');
 
-const isLeftFirst = Math.random() > 0.5;
+let count = 0;
+
+score.innerText = 'lets start to lern';
+
+function renderGame() {
+    const isLeftFirst = Math.random() > 0.5;
+    const language = getRandomLanguage();
+    const dir = dictionary[language];
+
+    title.innerText = dir[isLeftFirst?'left':'right'];
+    languageTitle.innerText = language;
 
 
+    buttons.forEach(item => item.onclick = buttonHandler)
 
+    function buttonHandler(){
+        const result = dir[this.id] === title.innerText;
 
-const language = getRandomLanguage();
-const dir = dictionary[language];
+        if(!result){
+            count--;
+        }else{
+            count++;
+        }
 
-// there mast be rundom side left or right in rundom language
+        if (count > 10) {
+            score.innerText = `${count}: you are the best`;
+        } else if (count > 5) {
+            score.innerText = `${count}: good`;
+        } else if (count >= 2) {
+            score.innerText = `${count}: normal`;
+        } else if (count < 2 && count >= -2) {
+            score.innerText = `${count}: noob`;
+        } else if (count < -2 && count >= -5) {
+            score.innerText = `${count}: really?`;
+        } else if (count < -5 && count >= -10) {
+            score.innerText = `${count}: bad`;
+        } else if (count < -10) {
+            score.innerText = `${count}: go to sleep`;
+        }
+        renderGame()
+    } 
 
+}
 
-let titleInner = isLeftFirst?dir.left:dir.right;
-renderTitle(titleInner)
+renderGame()
 
 
 function getRandomLanguage() {
-    const languages = Object.keys(dictionary); // Получаем список всех языков
-    const randomIndex = Math.floor(Math.random() * languages.length); // Случайный индекс
-    return languages[randomIndex]; // Возвращаем случайный язык
+    const languages = Object.keys(dictionary);
+    const randomIndex = Math.floor(Math.random() * languages.length);
+    return languages[randomIndex];
 };
 
-function renderTitle(value){
-    title.innerText = value;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function guesPosition(){
+
+//    const result= dictionary[language][this.id] === titleInner;
+
+
+//    console.log(result)
+// }

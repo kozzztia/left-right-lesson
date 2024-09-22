@@ -64,6 +64,7 @@ main {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 10px;
 
         button {
             flex: 1;
@@ -72,9 +73,10 @@ main {
         }
     }
 
-    h2 {
+    h2, h4, h3{
         width: 100%;
         text-align: center;
         margin-bottom: 10px;
+        font-size: 25px;
     }
 }

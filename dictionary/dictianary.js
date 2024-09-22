@@ -3,6 +3,10 @@ export const dictionary = {
         left: "left",
         right: "right"
     },
+    ukraine: {
+        left: "ліво",
+        right: "право"
+    },
     french: {
         left: "gauche",
         right: "droite"
